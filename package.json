@@ -2,8 +2,9 @@
   "name": "node.js-three-github.io",
   "version": "1.0.0",
   "scripts": {
-    "start": "node server.js",
-    "build": "webpack --mode=development"
+    "start": "nodemon server.js",
+    "build": "webpack --mode=development",
+    "watch": "webpack --mode=development --watch"
   },
   "keywords": [],
   "author": "twell1337",
@@ -11,6 +12,7 @@
   "description": "",
   "dependencies": {
     "express": "^4.19.2",
+    "nodemon": "^3.1.4",
     "path": "^0.12.7",
     "three": "^0.166.0"
   },
