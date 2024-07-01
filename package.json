@@ -1,0 +1,23 @@
+{
+  "name": "node.js-three-github.io",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack --mode=development"
+  },
+  "keywords": [],
+  "author": "twell1337",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "path": "^0.12.7",
+    "three": "^0.166.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.166.0",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  }
+}
