@@ -2,9 +2,10 @@
   "name": "node.js-three-github.io",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon server.js",
-    "build": "webpack --mode=development",
-    "watch": "webpack --mode=development --watch"
+    "start": "npm-run-all --parallel watch:server watch:build",
+    "build": "webpack",
+    "watch:server": "nodemon server.js",
+    "watch:build": "webpack --watch"
   },
   "keywords": [],
   "author": "twell1337",
@@ -13,11 +14,13 @@
   "dependencies": {
     "express": "^4.19.2",
     "nodemon": "^3.1.4",
+    "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
     "three": "^0.166.0"
   },
   "devDependencies": {
     "@types/three": "^0.166.0",
+    "nodemon-webpack-plugin": "^4.8.2",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"

@@ -138,7 +138,7 @@ const GouraudMaterial_2 = new THREE.ShaderMaterial({
                     vertexShader: vertexShader,
                     fragmentShader: fragmentShader_color,
                     uniforms: {
-                        uColor : { value: new THREE.Color(0xF270AA) },
+                        uColor : { value: new THREE.Color(0xd461ae) },
                     },
                 });
 

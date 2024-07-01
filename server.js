@@ -13,13 +13,7 @@ app.get('/', (req, res) => {
 });
 
 // Webpack в режиме наблюдения за изменениями main.js
-const webpackProcess = spawn('npm', ['run', 'watch']);
-webpackProcess.stdout.on('data', (data) => {
-  console.log(`Webpack stdout: ${data}`);
-});
-webpackProcess.stderr.on('data', (data) => {
-  console.error(`Webpack stderr: ${data}`);
-});
+
 
 // Запуск сервера
 app.listen(PORT, () => {
