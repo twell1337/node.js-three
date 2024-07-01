@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 
 // Разрешить доступ к статическим файлам из папки dist
 app.use(express.static(path.join(__dirname, '/dist')));
+app.use('/static', express.static(path.join(__dirname, 'static')));
 
 // Отправка главной HTML страницы
 app.get('/', (req, res) => {

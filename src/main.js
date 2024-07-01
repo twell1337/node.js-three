@@ -108,21 +108,6 @@ const bc = new THREE.TextureLoader().load('static/textures/a.png');
 bc.minFilter = THREE.NearestFilter;
 bc.magFilter = THREE.NearestFilter;
 
-
-// Create Light for Default Shaders
-const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x8d8d8d, 1 );
-                hemiLight.position.set( 0, 0, 0 );
-                scene.add( hemiLight );
-
-const light = new THREE.DirectionalLight( 0xffffff, 3 );
-light.position.set( 1.5, 0.5, 1 );
-light.castShadow = true;
-scene.add( light );
-
-const helper = new THREE.DirectionalLightHelper( light, .1 );
-scene.add(helper);
-
-
 // Create Material
 const GouraudMaterial_1 = new THREE.ShaderMaterial({
                     transparent: true,
@@ -161,42 +146,53 @@ sphere_wire.scale.set(1.01, 1.01, 1.01);
 let objs = [sphere, sphere_wire];
 
 const loader = new GLTFLoader();
-let mixer;
+let mixer, Hskeleton;
 
 loader.load(
     "static/models/test_threejs.glb", 
     (gltf) => {
+        // Параметры GLTF сцены
         gltf.scene.scale.set(0.3, 0.3, 0.3);
+        scene.add(gltf.scene);
+        console.log(gltf.scene);
+
         gltf.scene.traverse((child) => {
             console.log(`Child type: ${child.type}, name: ${child.name}`);
             if ( child.isSkinnedMesh ) {
-                // Установка материала для всех сеток (mesh)
-                child.material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-                child.material.skinning = true;
-                scene.add(child);
+                // Установка материала
+                child.material = GouraudMaterial_1;
 
-                // Создание SkeletonHelper для визуализации скелета
-                const Hskeleton = new THREE.SkeletonHelper(scene);
-                scene.add(Hskeleton);
-
-                mixer = new THREE.AnimationMixer(gltf.scene);
+                mixer = new THREE.AnimationMixer(child);
                 gltf.animations.forEach((clip) => {
                     mixer.clipAction(clip).play();
                 });
             }
         });
-        scene.add(gltf.scene);
-        console.log(gltf.scene);
+
+        // Создание SkeletonHelper для визуализации скелета
+        const Hskeleton = new THREE.SkeletonHelper(gltf.scene);
+        scene.add(Hskeleton);
     },
 );
-
 
 for (const i of objs) {
     scene.add(i);
 }
 
+// // Create Light for Default Shaders
+// const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x8d8d8d, 1 );
+//                 hemiLight.position.set( 0, 0, 0 );
+//                 scene.add( hemiLight );
 
+// const light = new THREE.DirectionalLight( 0xffffff, 3 );
+// light.position.set( 1.5, 0.5, 1 );
+// light.castShadow = true;
+// scene.add( light );
 
+// const helper = new THREE.DirectionalLightHelper( light, .1 );
+// scene.add(helper);
+
+// Объявление последних объектов
 const controls = new OrbitControls(camera, renderer.domElement);
 const clock = new THREE.Clock();
 
